@@ -1,0 +1,4 @@
+1. [x] PSF driver (text rendering, fonts, etc)
+2. [] mm - memory management (mmap, sbrk, etc)
+3. [] port newlib or any other existing libc that work and match unix v4
+4. [] GDT - ?? Maybe???

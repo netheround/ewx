@@ -4,6 +4,7 @@ KERNEL_ELF = iso/boot/xv4
 CC = x86_64-elf-gcc
 OBJCOPY = x86_64-elf-objcopy
 QEMU = qemu-system-x86_64
+NASM = nasm
 
 CFLAGS = -ffreestanding -O2 -Wall -Wextra -std=gnu11 -I./src/include -mcmodel=large
 LDFLAGS = -T linker.ld -nostdlib -mcmodel=large
@@ -15,11 +16,21 @@ LIBCDIR = $(SRCDIR)/libc
 FONTDIR = $(SRCDIR)/fonts
 
 FONT_OBJ = $(FONTDIR)/font.o
+GDT_OBJ = $(OBJDIR)/gdt/gdt.o
+GDT_ASM_OBJ = $(OBJDIR)/gdt/gdt_asm.o
 
-SRC = $(SRCDIR)/kernel.c $(wildcard $(LIBCDIR)/xv4/*.c) $(wildcard $(DRIVERSDIR)/*.c)
-OBJ = $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o) $(FONT_OBJ)
+SRC = $(SRCDIR)/kernel.c \
+	$(wildcard $(LIBCDIR)/xv4/*.c) \
+	$(wildcard $(DRIVERSDIR)/*.c) \
+	$(SRCDIR)/gdt/gdt.c \
+
+OBJ = $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o) $(FONT_OBJ) $(GDT_ASM_OBJ)
 
 all: $(ISO_NAME)
+
+$(GDT_ASM_OBJ): $(SRCDIR)/gdt/gdt_asm.s
+	@mkdir -p $(dir $@)
+	$(NASM) -f elf64 $< -o $@
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(dir $@)

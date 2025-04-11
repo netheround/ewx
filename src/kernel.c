@@ -2,6 +2,7 @@
 #include <limine.h>
 #include <xv4/console.h>
 
+#include "gdt/gdt.h"
 #include "kernel.h"
 
 /* Limine global framebuffer structure */
@@ -43,7 +44,9 @@ void _start(void) {
 
     fb = framebuffer_request.response->framebuffers[0];
 
-    /* Load all drivers .. */
+    /* Load all drivers & gdt .. */
+    gdt_init();
+
     _load_psf_driver();
     /***********************/
 

@@ -4,8 +4,8 @@
 #include <stdint.h>
 #include <limine.h>
 
-#include <xv4/colors.h>
-#include <xv4/psf1.h>
+#include <ewx/colors.h>
+#include <ewx/psf1.h>
 
 #define BITS_PER_BYTE 8
 

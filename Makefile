@@ -1,5 +1,5 @@
-ISO_NAME = xv4.iso
-KERNEL_ELF = iso/boot/xv4
+ISO_NAME = ewx.iso
+KERNEL_ELF = iso/boot/ewx
 
 CC = x86_64-elf-gcc
 OBJCOPY = x86_64-elf-objcopy
@@ -20,7 +20,7 @@ GDT_OBJ = $(OBJDIR)/gdt/gdt.o
 GDT_ASM_OBJ = $(OBJDIR)/gdt/gdt_asm.o
 
 SRC = $(SRCDIR)/kernel.c \
-	$(wildcard $(LIBCDIR)/xv4/*.c) \
+	$(wildcard $(LIBCDIR)/ewx/*.c) \
 	$(wildcard $(DRIVERSDIR)/*.c) \
 	$(SRCDIR)/gdt/gdt.c \
 

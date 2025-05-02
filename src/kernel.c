@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <limine.h>
-#include <xv4/console.h>
+#include <ewx/console.h>
 
 #include "gdt/gdt.h"
 #include "kernel.h"
@@ -23,6 +23,9 @@ static volatile LIMINE_REQUESTS_START_MARKER;
 __attribute__((used, section(".limine_requests_end")))
 static volatile LIMINE_REQUESTS_END_MARKER;
 
+__attribute__((aligned(16))) static uint8_t kernel_stack[4096];  /* 4 KiB aligned stack */
+uint8_t *_kernel_stack_top = kernel_stack + sizeof(kernel_stack);
+
 static psf1_font_t *_load_psf_driver(void)
 {
     psf1_font_t *font = psf1_init();
@@ -44,8 +47,8 @@ void _start(void) {
 
     fb = framebuffer_request.response->framebuffers[0];
 
-    /* Load all drivers & gdt .. */
-    gdt_init();
+    /* Load all drivers & gdt & idt .. */
+    //gdt_init();
 
     _load_psf_driver();
     /***********************/

@@ -1,5 +1,5 @@
 #include <stddef.h>
-#include <xv4/psf1.h>
+#include <ewx/psf1.h>
 
 extern uint8_t _binary_font_psf_start[];
 extern uint8_t _binary_font_psf_end;

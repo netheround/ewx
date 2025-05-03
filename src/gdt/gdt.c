@@ -34,11 +34,13 @@ static void gdt_set_tss(uint64_t base, uint32_t limit)
 
 void gdt_init(void)
 {
-    gdt_set_entry(0, 0, 0, 0, 0);
-    gdt_set_entry(1, 0, 0, 0x9A, 0xA0);
-    gdt_set_entry(2, 0, 0, 0x92, 0xA0);
-    gdt_set_entry(3, 0, 0, 0xFA, 0xA0);
-    gdt_set_entry(4, 0, 0, 0xF2, 0xA0);
+    gdt_set_entry(0, 0, 0, 0, 0);       /* Null descriptor */
+
+    gdt_set_entry(1, 0, 0, 0x9A, 0xA0); /* Ring 0 Code Segment */
+    gdt_set_entry(2, 0, 0, 0x92, 0xA0); /* Ring 0 Data Segment */
+
+    gdt_set_entry(3, 0, 0, 0xFA, 0xA0); /* Ring 3 Code Segment */
+    gdt_set_entry(4, 0, 0, 0xF2, 0xA0); /* Ring 3 Data Segment */
 
     for (uintptr_t i = 0; i < sizeof(tss); ++i)
         ((uint8_t*)&tss)[i] = 0;

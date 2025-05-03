@@ -33,18 +33,22 @@ SECTIONS
 
     . = ALIGN(CONSTANT(MAXPAGESIZE));
 
-    .data : {
-        *(.data .data.*)
+    .font : {
         *(.font)
     } :data
 
+    .data : {
+        *(.data .data.*)
+    } :data
+
     .bss : {
+        __bss_start = .;
         *(.bss .bss.*)
         *(COMMON)
+        __bss_end = .;
     } :data
 
     /DISCARD/ : {
         *(.eh_frame*)
-        *(.note .note.*)
     }
 }

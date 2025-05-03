@@ -1,5 +1,3 @@
-/* TODO: Implement ring 0 and ring 3 only */
-
 #ifndef GDT_H_
 #define GDT_H_
 

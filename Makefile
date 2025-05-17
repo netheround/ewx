@@ -1,6 +1,7 @@
 # === General Settings ===
 ISO_NAME     = ewx.iso
 KERNEL_ELF   = iso/boot/ewx
+DEBUG_FILE    = qemu.txt
 
 CC           = x86_64-elf-gcc
 NASM         = nasm
@@ -14,6 +15,7 @@ QEMU_DEBUG_FLAGS = -M smm=off -no-shutdown -no-reboot -d int
 # === Source Directories ===
 SRCDIR       = src
 OBJDIR       = bin
+DEBUGDIR     = debug
 DRIVERSDIR   = $(SRCDIR)/drivers
 LIBCDIR      = $(SRCDIR)/libc
 GDTDIR       = $(SRCDIR)/gdt
@@ -74,7 +76,7 @@ run: all
 
 # Debug in QEMU
 debug: all
-	$(QEMU) $(QEMU_DEBUG_FLAGS) -cdrom $(ISO_NAME)
+	$(QEMU) $(QEMU_DEBUG_FLAGS) -D $(DEBUGDIR)/$(DEBUG_FILE) -cdrom $(ISO_NAME)
 
 # Clean build artifacts
 clean:

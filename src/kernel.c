@@ -47,7 +47,7 @@ static psf1_font_t *_load_psf_driver(void)
     return font;
 }
 
-void _start(void) {
+__attribute__((section(".text"))) void _start(void) {
     /* Zero uninitializeed data */
     _clear_bss();
 

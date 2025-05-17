@@ -76,7 +76,7 @@ run: all
 
 # Debug in QEMU
 debug: all
-	$(QEMU) $(QEMU_DEBUG_FLAGS) -D $(DEBUGDIR)/$(DEBUG_FILE) -cdrom $(ISO_NAME)
+	$(QEMU) $(QEMU_DEBUG_FLAGS) -D $(DEBUGDIR)/$(DEBUG_FILE) -cdrom $(ISO_NAME) -S -s
 
 # Clean build artifacts
 clean:

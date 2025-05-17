@@ -47,7 +47,12 @@ static psf1_font_t *_load_psf_driver(void)
     return font;
 }
 
-__attribute__((section(".text"))) void _start(void) {
+/*
+ * https://stackoverflow.com/questions/63807228/x86-assembly-what-is-the-difference-between-text-startup-section-and-text-sec
+*/
+__attribute__((section(".text")))
+
+void _start(void) {
     /* Zero uninitializeed data */
     _clear_bss();
 

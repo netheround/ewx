@@ -15,7 +15,7 @@ _load_gdt:
     mov ss, ax
 
     ; Far return to reload CS
-    ; Stack still contains return address pushed by `call`
+    ; Stack still contains return address pushed by call
     ; So we just push the CS and do an lret
 
     mov rax, 0x08          ; Kernel code segment
